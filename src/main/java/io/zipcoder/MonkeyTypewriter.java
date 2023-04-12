@@ -13,7 +13,7 @@ public class MonkeyTypewriter {
                 "it was the spring of hope,\n" +
                 "it was the winter of despair,\n" +
                 "we had everything before us,\n" +
-                "we had nothing before us,\n" +
+                "we had Cg before us,\n" +
                 "we were all going direct to Heaven,\n" +
                 "we were all going direct the other way--\n" +
                 "in short, the period was so far like the present period, that some of\n" +
@@ -23,8 +23,29 @@ public class MonkeyTypewriter {
         // Do all of the Monkey / Thread building here
         // For each Copier(one safe and one unsafe), create and start 5 monkeys copying the introduction to
         // A Tale Of Two Cities.
+        UnsafeCopier unsafe1 = new UnsafeCopier(introduction);
+        Thread thread1 = new Thread(unsafe1);
+        Thread thread2 = new Thread(unsafe1);
+        Thread thread3 = new Thread(unsafe1);
+        Thread thread4 = new Thread(unsafe1);
+        Thread thread5 = new Thread(unsafe1);
+        thread1.start();
+        thread2.start();
+        thread3.start();
+        thread4.start();
+        thread5.start();
 
-
+        SafeCopier safe1 = new SafeCopier(introduction);
+        Thread thread6 = new Thread(safe1);
+        Thread thread7 = new Thread(safe1);
+        Thread thread8 = new Thread(safe1);
+        Thread thread9 = new Thread(safe1);
+        Thread thread10 = new Thread(safe1);
+        thread6.start();
+        thread7.start();
+        thread8.start();
+        thread9.start();
+        thread10.start();
         // This wait is here because main is still a thread and we want the main method to print the finished copies
         // after enough time has passed.
         try {
@@ -32,7 +53,14 @@ public class MonkeyTypewriter {
         } catch(InterruptedException e) {
             System.out.println("MAIN INTERRUPTED");
         }
-
+        
         // Print out the copied versions here.
+        System.out.println("unsafe ____");
+        System.out.println(unsafe1.copied);
+        System.out.println("unsafe ^^^^");
+        System.out.println("safe ____");
+        System.out.println(safe1.copied);
+        System.out.println("safe ^^^^");
+
     }
 }
